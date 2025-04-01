@@ -1,0 +1,25 @@
+# pyproject.toml
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pywinctl"
+version = "0.1.0"
+authors = [
+  
+]
+description = "A Python package to easily control Windows application windows."
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Desktop Environment :: Window Managers",
+    "Intended Audience :: Developers",
+]
+dependencies = [
+    "pygetwindow>=0.0.9",
+    "pywin32>=300; sys_platform == 'win32'", # Conditional dependency
+    "psutil>=5.8.0",
+]
