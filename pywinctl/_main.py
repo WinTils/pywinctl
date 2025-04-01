@@ -23,7 +23,7 @@ class Window:
         self._gw_window = gw_window
         # Store HWND immediately as it's the primary key
         try:
-             self._hwnd = gw_window. Hwnd # Accessing Hwnd property from pygetwindow
+             self._hwnd = gw_window._hWnd # Accessing Hwnd property from pygetwindow
         except AttributeError:
              raise ValueError("The provided pygetwindow object does not have an Hwnd attribute.")
         except gw.PyGetWindowException as e:
