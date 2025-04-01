@@ -472,6 +472,9 @@ def get_window_by_title(title: str, exact_match: bool = False) -> Optional[Windo
         raise PyWinCtlError(f"An unexpected error occurred in get_window_by_title: {e}") from e
 
 
+def init_winctl():
+    print("TEST")
+
 def get_active_window() -> Optional[Window]:
     """
     Gets the currently active (foreground) window.
