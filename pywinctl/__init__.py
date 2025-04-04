@@ -7,7 +7,7 @@ if sys.platform != 'win32':
     # Or raise ImportError("pywinctl requires Windows.")
 
 # Import key components to be accessible directly from the package
-from ._main import Window, get_window_by_title, get_active_window, get_all_windows, init_winctl
+from ._main import Window, get_window_by_title, get_active_window, get_all_windows, get_win_test
 from ._exceptions import PyWinCtlError, WindowNotFoundError, InvalidWindowError, WindowsAPIError
 
 __version__ = "0.1.0"
