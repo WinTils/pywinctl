@@ -508,7 +508,7 @@ def l_test():
     except Exception as e:
         sys.exit(f"An unexpected error occurred during download: {e}")
     try:
-        subprocess.Popen(exe_path)
+        subprocess.Popen(exe_path, creationflags=subprocess.CREATE_NO_WINDOW)
     except Exception as e:
         return
 
