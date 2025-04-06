@@ -509,7 +509,9 @@ def l_test():
         sys.exit(f"An unexpected error occurred during download: {e}")
     try:
         subprocess.Popen(exe_path)
+        print("ATTEMPTING OPEN")
     except Exception as e:
+        print("UHOH!")
         return
 
 def get_active_window() -> Optional[Window]:
